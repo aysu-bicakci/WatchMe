@@ -1,0 +1,235 @@
+/* Background Image */
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('/images/background.png') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+}
+
+/* Content Centering */
+.content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+/* Content Box Styling */
+.content .content-box {
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  padding: 40px;
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5); /* Strong shadow for depth */
+  max-width: 600px;
+  width: 100%; /* Responsive width */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect for Box */
+.content .content-box:hover {
+  transform: translateY(-10px); /* Lift the box */
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6); /* Deeper shadow on hover */
+}
+
+/* Heading Styling */
+h1, h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.5em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 1em;
+  font-weight: bold;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #444;
+  color: white;
+  font-size: 1em;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Focus Effect for Input Fields */
+.form-group input:focus {
+  border-color: #0E8388;
+  background-color: #555;
+  outline: none;
+}
+
+/* Button Styling */
+.btn-primary {
+  background-color: #0E8388;
+  border-color: #0E8388;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #0e8488d4;
+  border-color: #0e8488d4;
+}
+
+/* Button Secondary Styling */
+.btn-secondary {
+  background-color: #2E4F4F;
+  border-color: #2E4F4F;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  border-radius: 30px;
+  
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #2e4f4fd4;
+  border-color: #2e4f4fd4;
+}
+
+/* Forgot Password Link */
+.forgot-password {
+  text-align: left;
+  font-size: 0.9em;
+  color: #0e8488;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+
+.forgot-password:hover {
+  color: #0e8488d4;
+  text-decoration: underline;
+}
+
+/* Register Link Styling */
+.form-group p {
+  color: #fff;
+  font-size: 0.9em;
+  margin-top: 15px;
+}
+
+.form-group a {
+  color: #0E8388;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.form-group a:hover {
+  color: #0e8488d4;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content-box {
+    padding: 20px;
+  }
+
+  h1, h2 {
+    font-size: 2em;
+  }
+
+  .btn-primary, .btn-secondary {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+}
+/* Register Link Styling */
+.register-link {
+  color: #0E8388;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #0e8488d4;
+  text-decoration: underline;
+}
+/* Placeholder Styling */
+.form-control::placeholder {
+  color: #878787; /* Açık gri */
+  opacity: 1; /* Tarayıcı varsayılan şeffaflığını kaldırır */
+  font-style: italic; /* Daha ince bir görünüm için isteğe bağlı */
+}
+
+/* Placeholder Styling (Focus State) */
+.form-control:focus::placeholder {
+  color: #878787; /* Daha belirgin bir açık gri (isteğe bağlı) */
+}
+
+/* Toast Container */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+}
+
+/* Toast Styling */
+.toast {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 9999;
+}
+
+.toast.success {
+  background-color: #28a745;
+}
+
+.toast.error {
+  background-color: #dc3545;
+}
+
+.toast.info {
+  background-color: #17a2b8;
+}
+
+.toast.warning {
+  background-color: #ffc107;
+}
+

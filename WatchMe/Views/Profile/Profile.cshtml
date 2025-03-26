@@ -1,0 +1,142 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using WatchMe.Data
+@using WatchMe.Models
+@using WatchMe.Controllers
+@using WatchMe.Services
+@inject AppDbContext _context;
+@model List<WatchMe.Models.Movie>
+
+<div class="container my-5">
+    <div class="profile-container">
+        <div class="profile-content">
+            <h2>Hoşgeldin, @ViewData["UserName"]</h2> <!-- Hoşgeldin mesajı -->
+            <p>E-mail: @ViewData["UserEmail"]</p> <!-- Kullanıcı e-posta bilgisi -->
+        </div>
+    </div>
+</div>
+
+<!-- Beğenilen Filmler -->
+<section>
+    <h2>Beğendiklerin</h2>
+    @if (ViewData["LikedMovies"] == null || !(ViewData["LikedMovies"] is List<Movie> likedMovies) || !likedMovies.Any())
+    {
+        <p>No liked movies available.</p>
+    }
+    else
+    {
+        @await Html.PartialAsync("_LikedCard", likedMovies)
+    }
+</section>
+
+<hr class="divider-style">
+
+<!-- Beğenilmeyen Filmler -->
+<section>
+    <h2>Beğenmediklerin</h2>
+    @if (ViewData["DislikedMovies"] == null || !(ViewData["DislikedMovies"] is List<Movie> dislikedMovies) || !dislikedMovies.Any()) 
+    {
+        <p>No disliked movies available.</p>
+    }
+    else
+    {
+        @await Html.PartialAsync("_LikedCard", dislikedMovies)
+    }
+</section>
+
+<hr class="divider-style">
+
+<!-- İzlenen Filmler -->
+<section>
+    <h2>İzlenenler</h2>
+    @await Component.InvokeAsync("WatchList", new { userId = 1 })
+</section>
+
+    <style>
+        /* Profil alanı ve genel yerleşim */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px; /* Üst boşluk ekledik */
+        }
+
+        .profile-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px; /* Profil ile içerik arasına boşluk ekledik */
+        }
+
+        .profile-content {
+            color: white;
+            text-align: center;
+        }
+
+        /* Profil Başlık ve E-posta */
+        .profile-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .profile-content p {
+            font-size: 16px;
+            color: #bbb;
+        }
+
+        /* Bölüm Başlıkları */
+        section h2 {
+            font-size: 30px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        /* Divider */
+        hr {
+            margin: 20px 0;
+            border: none;
+            height: 1px;
+            background-color: #444;
+        }
+
+        /* Kart Düzeni */
+        .category-item {
+            width: 250px; /* Kart boyutunu küçülttük */ 
+            background-color: #444; /* Kart arka plan rengini değiştirdik */
+            border-radius: 12px; /* Kenarları oval yaptık */
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            margin: 10px; /* Kartlar arasında boşluk */
+        }
+
+        .category-item:hover {
+            transform: scale(1.05); /* Kart üzerine gelince büyüt */
+        }
+
+        .movie-poster {
+            width: 100%; /* Resmin genişliği cardın genişliğine göre ayarlandı */
+            height: 400px; /* Resim yüksekliğini ayarladık */
+            object-fit: cover; /* Resmi card içinde düzgün şekilde ölçekler */
+            border-bottom: 2px solid #555; /* Resim altına ince bir çizgi ekleyelim */
+        }
+
+        /* Rating kısmı */
+        .category-item .rating {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 25px;
+            font-size: 1rem;
+            display: none; /* Başlangıçta gizli */
+        }
+
+        .category-item:hover .rating {
+            display: block;
+        }
+    </style>

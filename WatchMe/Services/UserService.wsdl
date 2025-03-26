@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://example.org/UserService"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             name="UserService"
+             targetNamespace="http://example.org/UserService">
+
+  <message name="GetUserNameRequest">
+    <part name="userId" type="xsd:int" />
+  </message>
+
+  <message name="GetUserNameResponse">
+    <part name="userName" type="xsd:string" />
+  </message>
+
+  <portType name="UserServicePortType">
+    <operation name="GetUserName">
+      <input message="tns:GetUserNameRequest" />
+      <output message="tns:GetUserNameResponse" />
+    </operation>
+  </portType>
+
+  <binding name="UserServiceBinding" type="tns:UserServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="GetUserName">
+      <soap:operation soapAction="http://example.org/UserService/GetUserName" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+
+  <service name="UserService">
+    <port name="UserServicePort" binding="tns:UserServiceBinding">
+      <soap:address location="http://localhost:5003/UserService" />
+    </port>
+  </service>
+</definitions>

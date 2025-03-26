@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "WatchMe.Protos";
+
+// Film mesajı
+message Movie {
+    int32 id = 1;
+    string title = 2;
+    string poster_path = 3;
+    double popularity = 4;
+}
+
+// İstek ve yanıt mesajları
+message LikedMoviesRequest {
+    int32 user_id = 1;
+}
+
+message LikedMoviesResponse {
+    repeated Movie movies = 1;
+}
+
+// gRPC hizmeti
+service MovieLikeService {
+    rpc GetLikedMovies (LikedMoviesRequest) returns (LikedMoviesResponse);
+} 

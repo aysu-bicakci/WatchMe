@@ -1,0 +1,130 @@
+@model List<WatchMe.Models.Movie>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No movies available to display.</p>
+}
+else
+{  
+         <div class="category-items">
+        @foreach (var movie in Model)
+        {
+            <a href="@Url.Action("Details", "Movie", new { id = movie.MovieId })" class="category-item-link">
+                <div class="category-item">
+                    <!-- Resim -->
+                    <img src="@($"https://image.tmdb.org/t/p/w500{movie.PosterPath}")" 
+                         class="movie-poster" 
+                         alt="@movie.Title" />
+
+                    <!-- Puanlama -->
+                    <div class="rating">
+                        @movie.Popularity?.ToString("0.0")
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+   
+}
+ 
+ <style>
+    
+    .movie-poster {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+    .category-items {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 sütun */
+    gap: 15px;
+    padding: 20px 50px;
+}
+
+.category-item {
+    height: 360px !important; /* Daha dikey bir görünüm için yüksekliği artırdık */
+    background-color: #333;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Yumuşak geçişler */
+}
+
+.category-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease; /* Resmin büyüme efektine geçiş */
+}
+
+.category-name {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 5px;
+    color: grey;
+    font-size: 1.2rem;
+    text-align: center;
+    
+}
+
+/* Resim üzerine gelindiğinde efekti */
+.category-item:hover {
+    transform: scale(1.2); /* Resmin biraz büyümesi */
+    box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.4);
+    z-index: 1; /* Öne çıkma */
+}
+
+    /* Sol alt köşede puan */
+    .rating {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background-color: grey;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 25px;
+        font-size: 1rem;
+        display: none; /* Başlangıçta gizli */
+    }
+     /* Resim üzerine gelindiğinde buton ve puanın görünmesi */
+    .category-item:hover .rating {
+        display: block;
+    }
+
+         /* Responsive Tasarım */
+
+    /* Tabletler (768px ve üstü) */
+    @@media (max-width: 1200px) {
+        .category-items {
+            grid-template-columns: repeat(4, 1fr); /* 4 sütun */
+        }
+    }
+
+    /* Küçük Tabletler (768px ve altı) */
+    @@media (max-width: 992px) {
+        .category-items {
+            grid-template-columns: repeat(3, 1fr); /* 3 sütun */
+        }
+    }
+
+    /* Mobil Telefonlar (576px ve altı) */
+    @@media (max-width: 768px) {
+        .category-items {
+            grid-template-columns: repeat(2, 1fr); /* 2 sütun */
+            gap: 10px;
+            padding: 10px 20px;
+        }
+    }
+
+    /* Küçük Telefonlar (400px ve altı) */
+    @@media (max-width: 400px) {
+        .category-items {
+            grid-template-columns: 1fr; /* Tek sütun */
+            gap: 5px;
+            padding: 5px 10px;
+        }
+</style>

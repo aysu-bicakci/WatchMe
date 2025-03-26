@@ -1,0 +1,29 @@
+
+<form>
+  <div class="content">
+    <link rel="stylesheet" href="~/css/style.css">
+    <div class="content-box">
+      <h2>Login to Your Account</h2>
+      <div class="form-group">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" required />
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter your password" required />
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <button type="submit" class="btn btn-primary" asp-controller="Home" asp-action="Index">Login</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='/Home/ForgotPassword'">Forgot Password</button>
+      </div>
+      <p class="text-center mt-3">
+        Don't have an account? 
+        <a href="/Home/Register" class="register-link">Register here</a>
+      </p>
+    </div>
+  </div>
+  <!-- Toast Container for Notifications -->
+  <div id="toast-container" class="toast-container"></div>
+  <script src="~/js/common.js"></script>
+  <script src="~/js/login.js"></script>
+</form>

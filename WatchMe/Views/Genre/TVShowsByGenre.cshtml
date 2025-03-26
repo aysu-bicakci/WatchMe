@@ -1,0 +1,9 @@
+@model List<WatchMe.Models.TVShow>
+
+@{
+    ViewData["Title"] = "TVShows By Genre";
+}
+
+<h1>@ViewData["GenreName"] Dizileri</h1>
+
+@await Html.PartialAsync("_MovieCard", Model)

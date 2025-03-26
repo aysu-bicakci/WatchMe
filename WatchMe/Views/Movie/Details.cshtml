@@ -1,0 +1,113 @@
+<link href="~/css/details.css" rel="stylesheet" />
+@model List<WatchMe.Models.Movie>
+
+@{
+    ViewData["Title"] = Model?.FirstOrDefault()?.Title ?? "Movie Details";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+@if (Model.Any())
+{
+    var movie = Model.First(); // İlk ve tek filmi alıyoruz
+
+    <div class="tvshow-details-container">
+        <div class="tvshow-header">
+            <h1>@movie.Title</h1>
+        </div>
+
+        <!-- Movie poster and description -->
+        <div class="tvshow-body">
+            <div class="poster-container">
+                @if (!string.IsNullOrEmpty(movie.PosterPath))
+                {
+                    <img src="@movie.PosterPath" alt="@movie.Title Poster" class="poster-img" />
+                }
+            </div>
+
+            <div class="description-container">
+                <p>@movie.Overview</p>
+
+                <!-- Genre section -->
+                <div class="tvshow-genres">
+                    <h3>Genres:</h3>
+                    <ul>
+                        @foreach (var genre in movie.MovieGenres.Select(mg => mg.Genre))
+                        {
+                            <li>@genre?.Name</li>
+                        }
+                    </ul>
+                </div>
+
+                <!-- Actions section -->
+                <div class="tvshow-actions">
+                    <form method="post" asp-action="LikeMovie" asp-route-movieId="@movie.MovieId" class="action-form">
+                        <button type="submit" class="btn btn-action">👍 Like</button>
+                    </form>
+
+                    <form method="post" asp-action="DislikeMovie" asp-route-movieId="@movie.MovieId" class="action-form">
+                        <button type="submit" class="btn btn-action">👎 Dislike</button>
+                    </form>
+
+                    <form method="post" asp-action="AddToWatchList" class="action-form">
+                        <input type="hidden" name="movieId" value="@movie.MovieId" />
+                        <button type="submit" class="btn btn-action">+ Watchlist</button>
+                    </form>
+
+                    <form method="post" asp-action="RemoveMovie" class="action-form">
+                        <input type="hidden" name="movieId" value="@movie.MovieId" />
+                        <button type="submit" class="btn btn-action">- Remove Watchlist</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comments section -->
+        <h3 class="comments-heading">Comments:</h3>
+        <p>Total Comments: @ViewData["Comments"]</p>
+        <div class="comment-section">
+            <ul class="comment-list">
+                @foreach (var comment in movie.MovieComments)
+                {
+                    <li class="comment-item">
+                        <strong>@comment.User?.Nickname</strong>: @comment.Comment
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Your Comments -->
+        <h3 class="your-comments-heading">Your Comments:</h3>
+        <div class="your-comments">
+            @foreach (var comment in movie.MovieComments.Where(c => c.UserId == 1)) // Display only user's comments
+            {
+                <div class="comment-actions">
+                    <form method="post" action="@Url.Action("UpdateComment", "Movie", new { commentId = comment.MovieCommentId, movieId = movie.MovieId })">
+                        <input type="text" name="newComment" value="@comment.Comment" class="form-control" />
+                        <button type="submit" class="btn btn-warning btn-sm update">Update</button>
+                    </form>
+                    <form method="post" action="@Url.Action("DeleteComment", "Movie", new { commentId = comment.MovieCommentId, movieId = movie.MovieId })">
+                        <button type="submit" class="btn btn-danger btn-sm delete">Delete</button>
+                    </form>
+                </div>
+            }
+        </div>
+
+        <!-- Add a Comment -->
+        <h3>Add a Comment:</h3>
+        <form method="post" asp-action="AddComment">
+            <input type="hidden" name="movieId" value="@movie.MovieId" />
+            <textarea name="comment" placeholder="Write your comment..." class="form-control"></textarea>
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+        </form>
+    </div>
+}
+else
+{
+    <p>Movie data is not available.</p>
+}

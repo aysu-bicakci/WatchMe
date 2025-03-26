@@ -1,0 +1,110 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+           <img src="~/images/logo.png" alt="Logo" width="100">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/Home/Index">Anasayfa</a>
+                </li>
+                <!-- Diziler için Dropdown -->
+                <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="tvshowsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Diziler
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="tvshowsDropdown">
+        <li><a class="dropdown-item" href="@Url.Action("TVShowsByGenre", "Genre", new { genreId = 18 })">Drama</a></li>
+        <li><a class="dropdown-item" href="@Url.Action("TVShowsByGenre", "Genre", new { genreId = 10759 })">Action</a></li>
+        <li><a class="dropdown-item" href="@Url.Action("TVShowsByGenre", "Genre", new { genreId = 80 })">Crime</a></li>
+        <li><a class="dropdown-item" href="@Url.Action("TVShowsByGenre", "Genre", new { genreId = 16 })">Animation</a></li>
+        <li><a class="dropdown-item" href="@Url.Action("TVShowsByGenre", "Genre", new { genreId = 10765 })">Sci-Fi & Fantasy</a></li>
+    </ul>
+</li>
+
+
+                <!-- Filmler için Dropdown -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="moviesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Filmler
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="moviesDropdown">
+        <li><a class="dropdown-item" href="@Url.Action("MoviesByGenre", "Genre", new { genreId = 28 })">Aksiyon</a></li>
+        <li><a class="dropdown-item" href="@Url.Action("MoviesByGenre", "Genre", new { genreId = 35 })">Komedi</a></li>
+        <li><a class="dropdown-item" href="@Url.Action("MoviesByGenre", "Genre", new { genreId = 27 })">Horror</a></li>
+        <li><a class="dropdown-item" href="@Url.Action("MoviesByGenre", "Genre", new { genreId = 10749 })">Romance</a></li>
+        <li><a class="dropdown-item" href="@Url.Action("MoviesByGenre", "Genre", new { genreId = 878 })">Science Fiction</a></li>
+    </ul>
+</li>
+
+               <!-- Yeni ve Popüler -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Netflix">Yeni ve Popüler</a>
+                </li>
+
+                <!-- Keşfet Butonu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/Discover/Index">Keşfet</a>
+                </li>
+            </ul>
+
+
+            <!-- Arama ve Profil Butonları -->
+            <div class="d-flex ms-auto position-relative">
+                <!-- Arama alanı -->
+            
+<form class="d-flex position-relative" role="search" method="get" action="/search">
+    <input class="form-control me-2" type="search" name="searchTerm" placeholder="Ara..." aria-label="Search" style="background-color: rgba(255, 255, 255, 0.7); border: none; border-radius: 20px;">
+    <button class="btn position-absolute end-0 me-2" type="submit" style="background: none; border: none;">
+        <i class="fas fa-search text-success"></i>
+    </button>
+</form>
+                <!-- Profil simgesi -->
+                <a class="nav-link ms-3" href="/Profile/Profile">
+                    <i class="fas fa-user"></i>
+                    <span class="ms-1" style="color: white;">@ViewData["UserName"]</span>
+                     
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<style>
+input:focus {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Hover ile açılır menü */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* Animasyonsuz açılma */
+    padding: 0;
+    border-radius: 20px;
+}
+
+/* Profil simgesini hizalamak */
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+/* Profil simgesine tıklanabilir alan ekleyelim */
+.nav-link i {
+    font-size: 20px;
+    margin-left: 10px;
+    color: white; /* Simgeleri beyaz yapalım */
+     margin-right: 10px;
+
+}
+
+
+</style>
+

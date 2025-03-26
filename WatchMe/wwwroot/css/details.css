@@ -1,0 +1,215 @@
+/* Genel stil ayarları */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #333;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ana container */
+.tvshow-details-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #444;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Başlık */
+.tvshow-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 30px; /* Başlığın üstünden boşluk */
+    margin-bottom: 30px; /* Başlığın altından boşluk */
+}
+
+/* Resim ve açıklama kısmı */
+.tvshow-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 20px; /* İçeriğin üst kısmından boşluk */
+}
+
+.poster-container {
+    width: 100%; /* Ekranın uygun genişliği kadar uzar */
+    max-width: 300px; /* Maksimum genişlik */
+    height: auto; /* Yükseklik oranlı olarak ayarlanır */
+    flex-shrink: 0; /* Küçülmeyi engeller */
+}
+
+/* Poster image */
+.poster-img {
+    width: 100%;
+    height: auto; /* Görüntü oranını korur */
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+p {
+    font-size: 1.2em;
+    color: #ccc;
+    line-height: 1.6;
+    flex: 1;
+}
+
+/* Genre kısmı */
+.tvshow-genres {
+    margin-top: 40px; /* Daha fazla boşluk eklendi */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tvshow-genres h3 {
+    font-size: 1.4em;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.tvshow-genres ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.tvshow-genres li {
+    font-size: 1.1em;
+    color: #ccc;
+}
+
+/* Yorumlar ve aksiyonlar */
+.comment-section,
+.tvshow-actions {
+    margin-top: 60px; /* Daha fazla boşluk */
+}
+
+.comment-section h3,
+.tvshow-actions .btn {
+    font-size: 1.2em;
+}
+
+.comment-section h3 {
+    margin-top: 60px; /* Yorum başlığını daha aşağı kaydırdık */
+    color: #ccc; /* Yorum başlığını daha açık gri yapalım */
+}
+
+.tvshow-actions {
+    display: flex;
+    justify-content: flex-start; /* Butonlar sola hizalanacak */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-form {
+    display: inline-block;
+}
+
+.btn-action {
+    padding: 8px 15px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #555; /* Arka plan ile uyumlu koyu gri renk */
+    border: 2px solid #777; /* Hafif daha açık çerçeve */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-action:hover {
+    background-color: #777; /* Hover durumda çerçeve rengiyle uyumlu */
+    transform: scale(1.05);
+}
+
+.comment-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-item {
+    background-color: #444; /* Daha koyu gri, arka planla uyumlu */
+    padding: 8px 12px; /* Daha küçük boyut */
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    font-size: 1em; /* Yorum metnini biraz küçülttük */
+}
+
+/* Yorum metni */
+.comment-item strong {
+    color: #ffcc00; /* Kullanıcı adı rengi daha belirgin olacak şekilde */
+}
+
+/* Yorum formu */
+form .form-control {
+    width: 100%;
+    padding: 8px 12px; /* Daha küçük boyut */
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #555; /* Arka planla uyumlu hale getirildi */
+    color: #fff; /* Metin rengi beyaz */
+}
+
+form button {
+    background-color: #ffc107;
+    color: #333;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #e0a800;
+}
+
+/* Silme ve Güncelleme butonları */
+.comment-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.comment-actions form button {
+    padding: 5px 10px;
+    font-size: 0.9em; /* Butonları biraz küçültüyoruz */
+    background-color: #f44336; /* Kırmızı arka plan */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comment-actions form button.update {
+    background-color: #ffa500; /* Güncelleme butonu turuncu */
+}
+
+.comment-actions form button.delete:hover,
+.comment-actions form button.update:hover {
+    background-color: #d32f2f; /* Hover'da kırmızı tonu */
+}
+
+h3 {
+    margin-top: 40px; /* Her başlığın üstüne boşluk eklendi */
+    margin-bottom: 30px; /* Altına da boşluk eklendi */
+}
+
+.your-comments {
+    margin-top: 60px; /* "Your Comments" başlığını daha aşağı kaydırdık */
+}
+

@@ -1,0 +1,95 @@
+@{
+    var movies = ViewData["Movies"] as List<WatchMe.Models.Movie>;
+    var tvShows = ViewData["TVShows"] as List<WatchMe.Models.TVShow>;
+    var searchTerm = ViewData["SearchTerm"]?.ToString();
+}
+
+<h1>Search Results for: @searchTerm</h1>
+
+<h2>Movies</h2>
+@if (movies == null || !movies.Any())
+{
+    <p>No movies available to display.</p>
+}
+else
+{
+    <div class="category-items">
+        @foreach (var movie in movies)
+        {
+            <div class="category-item">
+                <!-- Resme tıklandığında detay sayfasına yönlendir -->
+                <a href="@Url.Action("Details", "Movie", new { id = movie.MovieId })">
+                    <img class="movie-poster" src="@(!string.IsNullOrEmpty(movie.PosterPath) ? movie.PosterPath : "/images/no-poster.jpg")" alt="@movie.Title" />
+                </a>
+                <div class="rating">
+                    <!-- Puan veya diğer bilgiler burada yer alabilir -->
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<h2>TV Shows</h2>
+@if (tvShows == null || !tvShows.Any())
+{
+    <p>No TV shows available to display.</p>
+}
+else
+{
+    <div class="category-items">
+        @foreach (var tvShow in tvShows)
+        {
+            <div class="category-item">
+                <!-- Resme tıklandığında detay sayfasına yönlendir -->
+                <a href="@Url.Action("Details", "TVShow", new { id = tvShow.TVShowId })">
+                    <img class="movie-poster" src="@(!string.IsNullOrEmpty(tvShow.PosterPath) ? tvShow.PosterPath : "/images/no-poster.jpg")" alt="@tvShow.Title" />
+                </a>
+                <div class="rating">
+                    <!-- Puan veya diğer bilgiler burada yer alabilir -->
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<style>
+    body {
+        background-color: #111;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+
+    .category-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .category-item {
+        width: 220px;
+        background-color: #333;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .category-item:hover {
+        transform: scale(1.05);
+    }
+
+    .movie-poster {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        border-bottom: 2px solid #555;
+    }
+
+    .rating {
+        background-color: #444;
+        color: #fff;
+        padding: 5px;
+        text-align: center;
+        font-size: 18px;
+    }
+</style>

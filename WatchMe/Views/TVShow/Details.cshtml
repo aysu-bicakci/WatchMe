@@ -1,0 +1,107 @@
+<link href="~/css/details.css" rel="stylesheet" />
+@model WatchMe.Models.TVShow
+
+@{
+    ViewData["Title"] = Model?.Title ?? "TV Show Details";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+<div id="toast-container"></div>
+
+<div class="tvshow-details-container">
+    <div class="tvshow-header">
+        <h1>@Model.Title</h1>
+    </div>
+
+    <!-- Resim ve açıklama kısmı -->
+    <div class="tvshow-body">
+        <div class="poster-container">
+            @if (!string.IsNullOrEmpty(Model.PosterPath))
+            {
+                <img src="@Model.PosterPath" alt="@Model.Title" class="poster-img" />
+            }
+        </div>
+
+        <div class="description-container">
+            <p>@Model.Overview</p>
+
+            <!-- Genre kısmı -->
+            <div class="tvshow-genres">
+                <h3>Genres:</h3>
+                <ul>
+                    @foreach (var genre in Model.TVShowGenres.Select(mg => mg.Genre))
+                    {
+                        <li>@genre?.Name</li>
+                    }
+                </ul>
+            </div>
+
+            <!-- Actions kısmı -->
+            <div class="tvshow-actions">
+                <form method="post" asp-action="LikeTVShow" asp-route-tvShowId="@Model.TVShowId" class="action-form">
+                    <button type="submit" class="btn btn-action">👍 Like</button>
+                </form>
+
+                <form method="post" asp-action="DislikeTVShow" asp-route-tvShowId="@Model.TVShowId" class="action-form">
+                    <button type="submit" class="btn btn-action">👎 Dislike</button>
+                </form>
+
+                <form method="post" asp-action="AddToWatchList" class="action-form">
+                    <input type="hidden" name="tvShowId" value="@Model.TVShowId" />
+                    <button type="submit" class="btn btn-action">+ Watchlist</button>
+                </form>
+
+                <form method="post" asp-action="RemoveTVShow" class="action-form">
+                    <input type="hidden" name="tvShowId" value="@Model.TVShowId" />
+                    <button type="submit" class="btn btn-action">- Remove from Watchlist</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Comments başlığı -->
+    <h3 class="comments-heading">Comments:</h3>
+    <p>Total Comments: @ViewData["Comments"]</p>
+    <div class="comment-section">
+        <ul class="comment-list">
+            @foreach (var comment in Model.TVShowComments)
+            {
+                <li class="comment-item">
+                    <strong>@comment.User?.Nickname</strong>: @comment.Comment
+                </li>
+            }
+        </ul>
+    </div>
+
+    <!-- Your Comments -->
+    <h3 class="your-comments-heading">Your Comments:</h3>
+    <div class="your-comments">
+        @foreach (var comment in Model.TVShowComments.Where(c => c.UserId == 1)) // Yalnızca kendi yorumlarınızı gösterir
+        {
+            <div class="comment-actions">
+                <form method="post" action="@Url.Action("UpdateComment", "TVShow", new { commentId = comment.TVShowCommentId, tvShowId = Model.TVShowId })">
+                    <input type="text" name="newComment" value="@comment.Comment" class="form-control" />
+                    <button type="submit" class="btn btn-warning btn-sm update">Update</button>
+                </form>
+                <form method="post" action="@Url.Action("DeleteComment", "TVShow", new { commentId = comment.TVShowCommentId, tvShowId = Model.TVShowId })">
+                    <button type="submit" class="btn btn-danger btn-sm delete">Delete</button>
+                </form>
+            </div>
+        }
+    </div>
+
+    <!-- Add a Comment -->
+    <h3>Add a Comment:</h3>
+    <form method="post" asp-action="AddComment">
+        <input type="hidden" name="tvShowId" value="@Model.TVShowId" />
+        <textarea name="comment" placeholder="Write your comment..." class="form-control"></textarea>
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+    </form>
+</div>

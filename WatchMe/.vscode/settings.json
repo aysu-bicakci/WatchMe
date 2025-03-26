@@ -1,0 +1,48 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "PG Local",
+      "database": "Python",
+      "username": "postgres",
+      "password": "root",
+      "connectionTimeout": 30
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "database": "watchme",
+      "name": "PG Local",
+      "username": "postgres",
+      "password": "root",
+      "connectionTimeout": 30
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "database": "watchme",
+      "name": "PG Local",
+      "username": "watchme_user",
+      "password": "your_password",
+      "connectionTimeout": 30
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "database": "watchme",
+      "name": "PG Local",
+      "username": "postgres",
+      "password": "guzelBen5209",
+      "connectionTimeout": 30
+    }
+  ]
+}

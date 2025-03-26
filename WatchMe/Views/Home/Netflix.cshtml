@@ -1,0 +1,115 @@
+@using Microsoft.EntityFrameworkCore
+@using WatchMe.Data
+@inject AppDbContext _context;
+
+ <section class="hero" style=" background-image: url('/images/oppenheimer.jpeg');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Unlimited movies, TV shows, and more.</h1>
+            <p>Watch anywhere. Cancel anytime.</p>
+            <form action="@Url.Action("Register", "Home")" method="get">
+            <button type="submit" class="btn-get-started">Get Started</button>
+        </form>
+        </div>
+ </section>
+
+<section>
+    <h2>En Yeni Filmler</h2>
+   @await Html.PartialAsync("_NetflixCard", await _context.Movies.OrderByDescending(m => m.ReleaseDate).Take(6).ToListAsync())
+</section>
+
+<hr style="margin: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: none; height: 2px; background-color: #333;">
+
+<section>
+    <h2>En Yeni Diziler</h2>
+    @await Html.PartialAsync("_NetflixCard", await _context.Movies.OrderBy(x => Guid.NewGuid()).Take(6).ToListAsync())
+</section>
+
+<hr style="margin: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: none; height: 2px; background-color: #333;">
+
+<section>
+    <h2>Popüler Olanlar</h2>
+  @await Html.PartialAsync("_NetflixCard", await _context.Movies.OrderByDescending(m => m.Popularity).Take(6).ToListAsync())
+    </div>
+</section>
+
+ <section class="hero" style=" background-image: url('/images/gucci.jpeg');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Unlimited movies, TV shows, and more.</h1>
+            <p>Watch anywhere. Cancel anytime.</p>
+            <form action="@Url.Action("Register", "Home")" method="get">
+            <button type="submit" class="btn-get-started">Get Started</button>
+        </form>
+        </div>
+</section>
+
+<section >
+    <h2>En Yeni Diziler</h2>
+    @await Html.PartialAsync("_NetflixCard", await _context.Movies.OrderBy(x => Guid.NewGuid()).Take(6).ToListAsync())
+</section>
+
+<hr style="margin: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: none; height: 2px; background-color: #333;">
+
+<section>
+    <h2>En Yeni Filmler</h2>
+    @await Html.PartialAsync("_NetflixCard", await _context.Movies.OrderByDescending(m => m.ReleaseDate).Take(6).ToListAsync())
+</section>
+
+
+
+<style>
+    h2{
+        color: #333;
+    }
+    .hero {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+        position: relative;
+        text-align: center;
+        z-index: 1;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .hero-content button {
+        padding: 10px 20px;
+        background-color: #e50914;
+        border: none;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .hero-content button:hover {
+        background-color: #f40612;
+    }
+
+</style>
